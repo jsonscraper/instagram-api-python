@@ -21,6 +21,7 @@ Official Python client for the [jsonscraper Instagram Scraper API](https://jsons
 - [License key and access](#2-get-api-access)
 - [First request](#3-make-your-first-request)
 - [Request examples](#more-request-examples)
+- [Complete example catalogue](#complete-request-example-catalogue)
 - [Endpoint reference](docs/endpoints.md)
 - [Configuration](#configuration)
 - [Errors, pagination and caching](#errors-pagination-and-caching)
@@ -107,6 +108,185 @@ Use the generic request method for newly added routes without waiting for an SDK
 - [Read a page of user media](examples/feed.py) — `GET /v1/user/medias/chunk`.
 
 These examples make one request each. They never loop automatically through your quota. For feed pagination, inspect the returned cursor and `has_more`, then pass the cursor back to the same endpoint.
+
+## Complete request example catalogue
+
+Every link opens a full program with parameters, authentication, timeout, errors and output handling. **[Running the examples](examples/README.md)** explains the commands.
+
+<details>
+<summary>User · 33 examples</summary>
+
+- [Get user info by ID](examples/endpoints/v1_user_by_id.py) — `GET /v1/user/by/id`.
+- [Get user info by username (by ID is faster)](examples/endpoints/v1_user_by_username.py) — `GET /v1/user/by/username`.
+- [Get user info by URL (by ID is faster)](examples/endpoints/v1_user_by_url.py) — `GET /v1/user/by/url`.
+- [Get info about user by ID](examples/endpoints/v1_user_about.py) — `GET /v1/user/about`.
+- [Get posts (chunked)](examples/endpoints/v1_user_medias_chunk.py) — `GET /v1/user/medias/chunk`.
+- [Get pinned posts](examples/endpoints/v1_user_medias_pinned.py) — `GET /v1/user/medias/pinned`.
+- [Get reels (chunked)](examples/endpoints/v1_user_clips_chunk.py) — `GET /v1/user/clips/chunk`.
+- [Get tagged (mentions) posts](examples/endpoints/v1_user_tag_medias_chunk.py) — `GET /v1/user/tag/medias/chunk`.
+- [Get user stories by ID](examples/endpoints/v1_user_stories.py) — `GET /v1/user/stories`.
+- [Get user stories by username (by ID is faster)](examples/endpoints/v1_user_stories_by_username.py) — `GET /v1/user/stories/by/username`.
+- [Get user highlights by ID](examples/endpoints/v1_user_highlights.py) — `GET /v1/user/highlights`.
+- [Get user highlights by username (by ID is faster)](examples/endpoints/v1_user_highlights_by_username.py) — `GET /v1/user/highlights/by/username`.
+- [Search in followers list by query (not working for legacy verified accounts)](examples/endpoints/v1_user_search_followers.py) — `GET /v1/user/search/followers`.
+- [Search in followings list by query (not working for legacy verified accounts)](examples/endpoints/v1_user_search_following.py) — `GET /v1/user/search/following`.
+- [Get user following (chunked)](examples/endpoints/v1_user_following_chunk.py) — `GET /v1/user/following/chunk`.
+- [Get user followers (chunked)](examples/endpoints/v1_user_followers_chunk.py) — `GET /v1/user/followers/chunk`.
+- [Get user info by ID](examples/endpoints/v2_user_by_id.py) — `GET /v2/user/by/id`.
+- [Get user info by username](examples/endpoints/v2_user_by_username.py) — `GET /v2/user/by/username`.
+- [Get user stories by ID](examples/endpoints/v2_user_stories.py) — `GET /v2/user/stories`.
+- [Get user stories by username](examples/endpoints/v2_user_stories_by_username.py) — `GET /v2/user/stories/by/username`.
+- [Get user reels by ID](examples/endpoints/v2_user_clips.py) — `GET /v2/user/clips`.
+- [Get user following list](examples/endpoints/v2_user_following.py) — `GET /v2/user/following`.
+- [Get user followers list](examples/endpoints/v2_user_followers.py) — `GET /v2/user/followers`.
+- [Get media where user is tagged](examples/endpoints/v2_user_tag_medias.py) — `GET /v2/user/tag/medias`.
+- [Get user highlights by ID](examples/endpoints/v2_user_highlights.py) — `GET /v2/user/highlights`.
+- [Get user highlights by username (by ID is faster)](examples/endpoints/v2_user_highlights_by_username.py) — `GET /v2/user/highlights/by/username`.
+- [Get business suggestions for user](examples/endpoints/v2_user_explore_businesses_by_id.py) — `GET /v2/user/explore/businesses/by/id`.
+- [Get suggested profiles for user](examples/endpoints/v2_user_suggested_profiles.py) — `GET /v2/user/suggested/profiles`.
+- [Get user followers (chunked)](examples/endpoints/gql_user_followers_chunk.py) — `GET /gql/user/followers/chunk`.
+- [Get user following (chunked)](examples/endpoints/gql_user_following_chunk.py) — `GET /gql/user/following/chunk`.
+- [Get user reposts](examples/endpoints/gql_user_reposts.py) — `GET /gql/user/reposts`.
+- [Get user clips (reels)](examples/endpoints/gql_user_clips.py) — `GET /gql/user/clips`.
+- [Get user profile media (grid)](examples/endpoints/gql_user_medias.py) — `GET /gql/user/medias`.
+
+</details>
+
+<details>
+<summary>Media · 20 examples</summary>
+
+- [Get media info by ID](examples/endpoints/v1_media_by_id.py) — `GET /v1/media/by/id`.
+- [Get media info by shortcode](examples/endpoints/v1_media_by_code.py) — `GET /v1/media/by/code`.
+- [Get media info by URL](examples/endpoints/v1_media_by_url.py) — `GET /v1/media/by/url`.
+- [Get media insights](examples/endpoints/v1_media_insight.py) — `GET /v1/media/insight`.
+- [Get media comments (chunked)](examples/endpoints/v1_media_comments_chunk.py) — `GET /v1/media/comments/chunk`.
+- [Get media likers](examples/endpoints/v1_media_likers.py) — `GET /v1/media/likers`.
+- [Get author of the media](examples/endpoints/v1_media_user.py) — `GET /v1/media/user`.
+- [Get media oEmbed data](examples/endpoints/v1_media_oembed.py) — `GET /v1/media/oembed`.
+- [Get media code from media ID (PK) (unlimited usage)](examples/endpoints/v1_media_code_from_pk.py) — `GET /v1/media/code/from/pk`.
+- [Get media ID (PK) from shortcode (unlimited usage)](examples/endpoints/v1_media_pk_from_code.py) — `GET /v1/media/pk/from/code`.
+- [Get media ID (PK) from URL (unlimited usage)](examples/endpoints/v1_media_pk_from_url.py) — `GET /v1/media/pk/from/url`.
+- [Get media info by ID](examples/endpoints/v2_media_info_by_id.py) — `GET /v2/media/info/by/id`.
+- [Get media info by shortcode](examples/endpoints/v2_media_info_by_code.py) — `GET /v2/media/info/by/code`.
+- [Get media info by URL](examples/endpoints/v2_media_info_by_url.py) — `GET /v2/media/info/by/url`.
+- [Get media comments](examples/endpoints/v2_media_comments.py) — `GET /v2/media/comments`.
+- [Get media likers](examples/endpoints/v2_media_likers.py) — `GET /v2/media/likers`.
+- [Check comment for offensiveness](examples/endpoints/v2_media_comment_offensive.py) — `GET /v2/media/comment/offensive`.
+- [Get comment replies](examples/endpoints/v2_media_comments_replies.py) — `GET /v2/media/comments/replies`.
+- [Get media likers by media ID](examples/endpoints/gql_media_likers.py) — `GET /gql/media/likers`.
+- [Get video usertags by media IDs](examples/endpoints/gql_media_usertags.py) — `GET /gql/media/usertags`.
+
+</details>
+
+<details>
+<summary>Story · 6 examples</summary>
+
+- [Get story by ID](examples/endpoints/v1_story_by_id.py) — `GET /v1/story/by/id`.
+- [Get story by URL](examples/endpoints/v1_story_by_url.py) — `GET /v1/story/by/url`.
+- [Download story by ID](examples/endpoints/v1_story_download.py) — `GET /v1/story/download`.
+- [Download story by direct media URL (unlimited usage)](examples/endpoints/v1_story_download_by_url.py) — `GET /v1/story/download/by/url`.
+- [Download story file by story URL (IG story link)](examples/endpoints/v1_story_download_by_story_url.py) — `GET /v1/story/download/by/story/url`.
+- [Get story by ID](examples/endpoints/v2_story_by_id.py) — `GET /v2/story/by/id`.
+
+</details>
+
+<details>
+<summary>Highlight · 3 examples</summary>
+
+- [Get highlight by ID](examples/endpoints/v1_highlight_by_id.py) — `GET /v1/highlight/by/id`.
+- [Get highlight by URL](examples/endpoints/v1_highlight_by_url.py) — `GET /v1/highlight/by/url`.
+- [Get highlight by ID](examples/endpoints/v2_highlight_by_id.py) — `GET /v2/highlight/by/id`.
+
+</details>
+
+<details>
+<summary>Location · 6 examples</summary>
+
+- [Get location by ID](examples/endpoints/v1_location_by_id.py) — `GET /v1/location/by/id`.
+- [Get location top medias](examples/endpoints/v1_location_medias_top.py) — `GET /v1/location/medias/top`.
+- [Get location recent medias](examples/endpoints/v1_location_medias_recent.py) — `GET /v1/location/medias/recent`.
+- [Get location top medias (chunked)](examples/endpoints/v1_location_medias_top_chunk.py) — `GET /v1/location/medias/top/chunk`.
+- [Get location recent medias (chunked)](examples/endpoints/v1_location_medias_recent_chunk.py) — `GET /v1/location/medias/recent/chunk`.
+- [Search locations](examples/endpoints/v1_location_search.py) — `GET /v1/location/search`.
+
+</details>
+
+<details>
+<summary>Hashtag · 8 examples</summary>
+
+- [Get hashtag by name](examples/endpoints/v1_hashtag_by_name.py) — `GET /v1/hashtag/by/name`.
+- [Get hashtag top medias](examples/endpoints/v1_hashtag_medias_top.py) — `GET /v1/hashtag/medias/top`.
+- [Get hashtag top medias (chunked)](examples/endpoints/v1_hashtag_medias_top_chunk.py) — `GET /v1/hashtag/medias/top/chunk`.
+- [Get hashtag recent medias (chunked)](examples/endpoints/v1_hashtag_medias_top_recent_chunk.py) — `GET /v1/hashtag/medias/top/recent/chunk`.
+- [Get hashtag clips (chunked)](examples/endpoints/v1_hashtag_medias_clips_chunk.py) — `GET /v1/hashtag/medias/clips/chunk`.
+- [Get hashtag by name](examples/endpoints/v2_hashtag_by_name.py) — `GET /v2/hashtag/by/name`.
+- [Get hashtag top medias](examples/endpoints/v2_hashtag_medias_top.py) — `GET /v2/hashtag/medias/top`.
+- [Get hashtag recent medias](examples/endpoints/v2_hashtag_medias_recent.py) — `GET /v2/hashtag/medias/recent`.
+
+</details>
+
+<details>
+<summary>Search · 5 examples</summary>
+
+- [Search hashtags](examples/endpoints/v1_search_hashtags.py) — `GET /v1/search/hashtags`.
+- [Search users](examples/endpoints/v1_search_users.py) — `GET /v1/search/users`.
+- [Search music](examples/endpoints/v1_search_music.py) — `GET /v1/search/music`.
+- [Search hashtags](examples/endpoints/v2_search_hashtags.py) — `GET /v2/search/hashtags`.
+- [Search music](examples/endpoints/v2_search_music.py) — `GET /v2/search/music`.
+
+</details>
+
+<details>
+<summary>Fbsearch · 8 examples</summary>
+
+- [Search places](examples/endpoints/v1_fbsearch_places.py) — `GET /v1/fbsearch/places`.
+- [Top search](examples/endpoints/v1_fbsearch_topsearch.py) — `GET /v1/fbsearch/topsearch`.
+- [Search accounts (users)](examples/endpoints/v2_fbsearch_accounts.py) — `GET /v2/fbsearch/accounts`.
+- [Search places (locations)](examples/endpoints/v2_fbsearch_places.py) — `GET /v2/fbsearch/places`.
+- [Top search](examples/endpoints/v2_fbsearch_topsearch.py) — `GET /v2/fbsearch/topsearch`.
+- [Search reels (clips)](examples/endpoints/v2_fbsearch_reels.py) — `GET /v2/fbsearch/reels`.
+- [Search users](examples/endpoints/v3_fbsearch_accounts.py) — `GET /v3/fbsearch/accounts`.
+- [Search places (locations)](examples/endpoints/v3_fbsearch_places.py) — `GET /v3/fbsearch/places`.
+
+</details>
+
+<details>
+<summary>Userstream · 2 examples</summary>
+
+- [Get user info stream by ID](examples/endpoints/v2_userstream_by_id.py) — `GET /v2/userstream/by/id`.
+- [Get user info stream by username](examples/endpoints/v2_userstream_by_username.py) — `GET /v2/userstream/by/username`.
+
+</details>
+
+<details>
+<summary>Track · 2 examples</summary>
+
+- [Get music feed by canonical ID](examples/endpoints/v2_track_by_canonical_id.py) — `GET /v2/track/by/canonical/id`.
+- [Get music feed by ID](examples/endpoints/v2_track_by_id.py) — `GET /v2/track/by/id`.
+
+</details>
+
+<details>
+<summary>Comments · 2 examples</summary>
+
+- [Get comments list by media ID (chunked)](examples/endpoints/gql_comments_chunk.py) — `GET /gql/comments/chunk`.
+- [Get threaded replies list by comment ID (chunked)](examples/endpoints/gql_comments_threaded_chunk.py) — `GET /gql/comments/threaded/chunk`.
+
+</details>
+
+<details>
+<summary>Comment · 1 examples</summary>
+
+- [Get comment likers list by comment ID (chunked)](examples/endpoints/gql_comment_likers_chunk.py) — `GET /gql/comment/likers/chunk`.
+
+</details>
+
+<details>
+<summary>Topsearch · 1 examples</summary>
+
+- [Search top content by keyword](examples/endpoints/gql_topsearch.py) — `GET /gql/topsearch`.
+
+</details>
 
 ## Configuration
 
