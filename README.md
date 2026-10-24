@@ -1,81 +1,153 @@
-# jsonscraper python SDK — Instagram API and TikTok API
+# Instagram Scraper API for Python
 
-Official, composable clients for [Instagram API](https://jsonscraper.com/services/ig-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=jsonscraper-python&utm_content=readme) and [TikTok API](https://jsonscraper.com/services/tiktok-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=jsonscraper-python&utm_content=readme). Access public profiles, media, comments, followers, hashtags, search, and other documented endpoints without maintaining a scraper.
+[![Latest release](https://img.shields.io/github/v/tag/jsonscraper/instagram-api-python?label=release&style=flat-square)](https://github.com/jsonscraper/instagram-api-python/tags)
+[![Python requirements](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white&style=flat-square)](#1-install)
+[![Last commit](https://img.shields.io/github/last-commit/jsonscraper/instagram-api-python?style=flat-square)](https://github.com/jsonscraper/instagram-api-python/commits)
+[![MIT license](https://img.shields.io/github/license/jsonscraper/instagram-api-python?style=flat-square)](LICENSE)
 
-Requirements: **Python 3.10+**. Server-side use only. **151 unique GET routes** from the published Postman collections, with named methods and a generic request method for new routes.
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/jsonscraper/workspace/jsonscraper/collection/52903714-fe84d353-0a19-431f-a39d-1c2640d96fb0)
 
-## Install
 
-Clone this repository, then run:
+Official Python client for the [jsonscraper Instagram Scraper API](https://jsonscraper.com/services/ig-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=instagram-api-python&utm_content=readme). **97 documented GET routes**, simple installation, configurable requests, working examples, and responses ready for your application.
+
+![From API access to your first JSON response](docs/quickstart.svg)
+
+**[Get an API key](https://jsonscraper.com/services/ig-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=instagram-api-python&utm_content=get_access) · [Current pricing](https://jsonscraper.com/services/ig-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=instagram-api-python&utm_content=pricing#pricing) · [Endpoint reference](docs/endpoints.md) · [Runnable examples](examples) · [Postman](https://www.postman.com/jsonscraper/workspace/jsonscraper/collection/52903714-fe84d353-0a19-431f-a39d-1c2640d96fb0)**
+
+## Navigation
+
+- [What you can build](#what-you-can-build)
+- [Installation](#1-install)
+- [License key and access](#2-get-api-access)
+- [First request](#3-make-your-first-request)
+- [Request examples](#more-request-examples)
+- [Endpoint reference](docs/endpoints.md)
+- [Configuration](#configuration)
+- [Errors, pagination and caching](#errors-pagination-and-caching)
+- [FAQ](#faq)
+- [Development and releases](#development-and-releases)
+- [Privacy](#privacy)
+
+## What you can build
+
+Read public profiles; retrieve media, reels and comments; explore hashtag/location/search routes; build analytics, monitoring and data integrations.
+
+This repository contains the **Instagram SDK only**. It calls the hosted jsonscraper API; you do not need to maintain browser automation, platform sessions or a scraping server.
+
+## 1. Install
+
+Requirements: **Python 3.10+**.
 
 ```sh
-python -m pip install .
-# Or directly from a release:
-python -m pip install "git+https://github.com/jsonscraper/jsonscraper-python.git@v0.1.0"
+python -m pip install "git+https://github.com/jsonscraper/instagram-api-python.git@v0.1.0"
 ```
 
-This initial release supports installation from GitHub or a local checkout. Package names are prepared; availability in PyPI, npm, Packagist, Maven Central, and NuGet is a separate release step. Do not assume a package is registered there.
+The GitHub installation above works independently of package registry registration. A public PyPI/npm/Packagist listing is a separate release step; this README does not claim those listings already exist.
 
-## API access, license key, and current pricing
+To develop from a checkout, clone this repository and install its dependencies. Python: `python -m pip install .`; Node.js: `npm ci`; PHP: `composer install`; Go: `go mod download`; Java: `mvn install`; C#: `dotnet build`.
 
-The SDK source is **MIT-licensed**. API usage requires a separate commercial license for the selected product. Obtain your key and check current plans, quotas, and purchase options on the [Instagram product page](https://jsonscraper.com/services/ig-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=jsonscraper-python&utm_content=pricing) or [TikTok product page](https://jsonscraper.com/services/tiktok-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=jsonscraper-python&utm_content=pricing). Follow **Get Access** there. We link to current prices instead of copying amounts that can become outdated.
+## 2. Get API access
 
-Configure keys as environment variables; never commit them:
+The SDK source uses the **MIT license**. Hosted API usage requires a separate **Instagram API license** with its own quota and validity period.
+
+1. Open the [Instagram product page](https://jsonscraper.com/services/ig-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=instagram-api-python&utm_content=onboarding).
+2. Check the current plans and follow **Get Access** to obtain your license key.
+3. Save the key on your server as an environment variable:
 
 ```sh
-export JSONSCRAPER_INSTAGRAM_LICENSE_KEY='your-instagram-license-key'
-export JSONSCRAPER_TIKTOK_LICENSE_KEY='your-tiktok-license-key'
+export JSONSCRAPER_INSTAGRAM_LICENSE_KEY='your-license-key'
 ```
 
-## Quick start
+Current prices and limits are linked from the product page rather than copied into this README. That keeps the purchase information current. Do not commit your key or put it in browser/mobile frontend code.
+
+## 3. Make your first request
 
 ```python
 import os
-from jsonscraper import Instagram, TikTok, APIError
+from jsonscraper_instagram import Instagram, APIError
 
-ig = Instagram(os.environ["JSONSCRAPER_INSTAGRAM_LICENSE_KEY"], timeout=30, retries=1)
-profile = ig.v1_user_by_username(username="apple", cache_timeout=60)
-print(profile)
-
-tiktok = TikTok(os.environ["JSONSCRAPER_TIKTOK_LICENSE_KEY"])
-video = tiktok.get_video_by_id(video_id="7106855913906081070", cache_timeout=60)
-print(video["tiktok"]["aweme_detail"]["aweme_id"])
+client = Instagram(os.environ["JSONSCRAPER_INSTAGRAM_LICENSE_KEY"], timeout=30, retries=1)
+try:
+    response = client.v1_user_by_username(username="apple", cache_timeout=60)
+    if response.get("status") != "ok":
+        raise RuntimeError("The API returned an application error")
+    print(response["ig"])
+except APIError as error:
+    print(f"HTTP {error.status}; check your key, quota, or parameters")
 ```
 
-Both keys are needed to run both product examples. You can use either client independently. Every request accepts the query parameters documented in [the endpoint reference](docs/endpoints.md), including optional cache and cursor controls. Parameter names and API paths stay identical to Postman. Python/JavaScript/PHP/Java named methods use snake_case; Go/C# use PascalCase.
+**[Open the runnable version](examples/quickstart.py)**. The example uses a public account and a short server-side cache. You can replace the account with one relevant to your project. A licensed live request may consume quota.
 
-## Configuration and errors
+The profile response follows this shape (shortened; fields can be absent or null):
 
-- Instagram default base URL: `https://ig.jsonscraper.com`.
-- TikTok default base URL: `https://tiktok.evelode.com`. Older collections mention `/tiktok-api`; the current product page and live smoke test use the root URL.
-- Configure base URL, timeout, retries and default `cache_timeout` through client options. Timeouts are seconds, except Node.js which uses milliseconds; Go uses `time.Duration`, Java uses `Duration`, and C# uses `TimeSpan`.
-- Retries default to **0**. Opt in to at most 5 retries for HTTP 429, 502, 503 and 504; numeric `Retry-After` is capped at 60 seconds, otherwise bounded exponential backoff applies. HTTP-date `Retry-After` falls back to backoff. Each retry may count towards your API quota. Total time can exceed one request timeout.
-- Authentication uses the API's `license_key` query parameter. The configured key overrides any per-request key. Redirects are disabled; transport errors contain no request URL or key. Keep request URLs out of application/proxy logs.
-- HTTP errors expose the status and retry information. HTTP 200 does **not** guarantee application success: check the response `status`, `rate_limit_reached`, and the product payload's status fields.
-- Unknown fields are preserved. IDs should be passed as strings, never converted to floating point. Python preserves integer precision; PHP uses `JSON_BIGINT_AS_STRING`; Go's `Decode` uses `json.Number`; Java returns raw bytes for your chosen JSON library; C# supports raw bytes and `JsonDocument`.
-- JSON routes return the upstream envelope. Binary download routes return bytes (PHP: string); no SDK follows a download redirect automatically. Handle redirects explicitly after validating the destination without forwarding your license key.
-- Cancellation: Go accepts a context, Java supports thread interruption, and C# accepts `CancellationToken`. For other languages use bounded request timeouts.
+```json
+{
+  "status": "ok",
+  "ig": {
+    "pk": "5821462185",
+    "username": "apple",
+    "is_private": false,
+    "is_verified": true
+  }
+}
+```
 
-## Pagination and caching
+**[Response handling guide](docs/responses.md)** explains the envelope, application errors and identifiers. Profile responses were verified against the live API on 2026-10-25.
 
-Pagination differs between endpoints. Read `cursor`, `max_cursor`, `has_more`, and response metadata from the endpoint you use, then pass the returned cursor unchanged to the next call. Stop on `has_more == false/0`, a repeated cursor, or your own page/request budget. The SDK does not guess cursor fields or automatically consume your quota.
+## Find the request you need
 
-`cache_timeout=60` requests server-side caching for 60 seconds. Set `0` to disable it. See the product's current quota and fair-use terms; the SDK does not cache API responses locally.
+The [endpoint reference](docs/endpoints.md) lists every named SDK method, exact API path, query parameter and purpose. The [Postman collection](https://www.postman.com/jsonscraper/workspace/jsonscraper/collection/52903714-fe84d353-0a19-431f-a39d-1c2640d96fb0) contains current descriptions, parameter examples and endpoint groups.
 
-## Documentation and examples
+Use the generic request method for newly added routes without waiting for an SDK release. Parameter names remain identical to Postman. For example, cache controls are always `cache_timeout`; platform IDs are passed as strings.
 
-- [All named methods, API paths and query parameters](docs/endpoints.md)
-- [Response envelopes and verified sample shapes](docs/responses.md)
-- [Instagram Postman collection](https://www.postman.com/jsonscraper/workspace/jsonscraper/collection/52903714-fe84d353-0a19-431f-a39d-1c2640d96fb0)
-- [TikTok Postman collection](https://www.postman.com/evelode/workspace/evelode/collection/24862082-d886cc87-4267-4e0c-b57a-2d083add50ad)
-- [Support and contacts](https://jsonscraper.com/contacts?utm_source=github&utm_medium=sdk&utm_campaign=jsonscraper-python&utm_content=support)
+## More request examples
 
-## Privacy and affiliation
+- [Read a media item](examples/media.py) — `GET /v1/media/by/code`.
+- [Search public users](examples/search.py) — `GET /v1/search/users`.
+- [Read a page of user media](examples/feed.py) — `GET /v1/user/medias/chunk`.
 
-The SDK sends requests only to the configured API endpoint and contains no installation, usage, or conversion telemetry. README links include campaign parameters so jsonscraper can measure website referrals. Website attribution respects Do Not Track and Global Privacy Control. Third-party platform names identify compatibility; jsonscraper is not affiliated with Instagram, Meta, or TikTok.
+These examples make one request each. They never loop automatically through your quota. For feed pagination, inspect the returned cursor and `has_more`, then pass the cursor back to the same endpoint.
 
-## Development
+## Configuration
 
-Run `python3 tests/contract.py` from the repository root. This exercises the real client against a local HTTP server without credentials or paid API requests. A GitHub Actions workflow template is included in `docs/github-actions.yml`. To enable automatic checks, copy it to `.github/workflows/test.yml` with a token that has the `workflow` permission. Live smoke tests require your own environment keys and may consume quota.
+Default API base URL: **`https://ig.jsonscraper.com`**. Configure `base_url`, `timeout` (seconds), `retries`, `cache_timeout`. HTTPS is required except for explicit localhost test servers. Default timeout is 30 seconds.
 
-Version 0.1.0 is an initial release. See [CHANGELOG.md](CHANGELOG.md). Report reproducible SDK issues on GitHub without credentials or sensitive payloads.
+Retries default to **0**; opt in to 0–5 retries for HTTP 429, 502, 503 and 504. Numeric `Retry-After` is respected up to 60 seconds; otherwise bounded exponential backoff applies. HTTP-date values use backoff. Retries may consume API quota, and total elapsed time can exceed one request timeout.
+
+The configured license key is sent using the API's `license_key` query parameter. It overrides per-request attempts to supply a different key. Redirects are disabled, TLS verification stays enabled, and transport errors do not include request URLs. Keep credential-bearing URLs out of your application and reverse-proxy logs.
+
+## Errors, pagination and caching
+
+HTTP exceptions expose the status code and retry information. Transport failures have a credential-safe message. HTTP 200 alone is not application success: inspect `status` and any quota/product error fields. HTTP 403 can indicate an access restriction; 429 means you should wait or check the plan's limits.
+
+Pagination is endpoint-specific. Pass a returned cursor unchanged to the next request, stop when `has_more` is false/0, and stop if a cursor repeats. Always set your own page/request budget. The SDK does not invent cursor fields or automatically spend your quota.
+
+`cache_timeout=60` enables API-side caching for 60 seconds; `0` disables it. See the current product terms for quota treatment. The SDK does not cache responses locally.
+
+Large IDs must remain strings in your application. Python preserves integer precision; JavaScript converts unsafe JSON integers to strings; PHP uses `JSON_BIGINT_AS_STRING`; Go provides `Decode()` with `json.Number`; Java returns response bytes for your chosen JSON library; C# exposes bytes and `JsonDocument`.
+
+## FAQ
+
+**Is this the official platform API?** This is the jsonscraper service SDK. jsonscraper is independent and is not affiliated with or endorsed by Instagram, Meta.
+
+**Is the library free?** The SDK source is MIT-licensed. The hosted API requires a separate paid license. See [current plans and access](https://jsonscraper.com/services/ig-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=instagram-api-python&utm_content=faq).
+
+**Does it work without a key?** A valid product license key is required for normal API requests. Never use a README example as a source of credentials.
+
+**Can I use it in an existing application?** Yes. Install the package, configure the client, and call it from your server-side service. It does not require a web framework.
+
+**Where do I ask for help?** For reproducible SDK bugs, open a [GitHub issue](https://github.com/jsonscraper/instagram-api-python/issues) with sanitized details. For plans, license questions and service support, use [jsonscraper contacts](https://jsonscraper.com/contacts?utm_source=github&utm_medium=sdk&utm_campaign=instagram-api-python&utm_content=support).
+
+## Development and releases
+
+```sh
+python3 tests/contract.py
+```
+
+Tests run offline against a local/mock HTTP server and require no API key. A GitHub Actions template is included in `docs/github-actions.yml`; enabling it later requires `workflow` permission. No automatic workflow is enabled by this release.
+
+See [CHANGELOG.md](CHANGELOG.md) for release notes. Package registry publishing is tracked separately from the public GitHub source release.
+
+## Privacy
+
+The SDK includes no installation, API usage or conversion telemetry. It sends requests only to the configured API endpoint. README website links carry UTM campaign parameters so jsonscraper can attribute website visits and actions to this repository; website tracking respects Do Not Track and Global Privacy Control. Purchase clicks are measured as intent, not confirmed payment.

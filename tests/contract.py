@@ -8,7 +8,7 @@ class Server(http.server.BaseHTTPRequestHandler):
  def do_GET(self):
   from urllib.parse import urlsplit,parse_qs
   url=urlsplit(self.path);requests.append((url.path,parse_qs(url.query),self.command))
-  status=200;body=b'{"status":"ok","id":18446744073709551616,"tiktok":{"aweme_detail":{"aweme_id":"7106855913906081070"}}}'
+  status=200;body=b'{"status":"ok","id":18446744073709551616,"ig":{"username":"apple"}}'
   content='application/json'
   if url.path=='/retry':status=429
   if url.path=='/forbidden':status=403
@@ -40,7 +40,7 @@ def run(path,**env):
  assert r.returncode==0,(lang,r.stderr.decode())
  assert b'contract-secret' not in r.stdout+r.stderr,'Credential leaked in output'
  return r.stdout,requests[before:]
-raw,req=run('/getVideoByID');d=json.loads(raw)
+raw,req=run('/v1/user/by/username');d=json.loads(raw)
 assert d['status']=='ok' and str(d['id'])=='18446744073709551616',(lang,raw)
 assert len(req)==1 and req[0][2]=='GET'
 q=req[0][1];assert q['license_key']==['contract-secret'] and q['video_id']==['a&b?x=1+/Ю'] and q['count']==['0'] and q['flag']==['false'],q

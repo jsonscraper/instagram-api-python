@@ -1,10 +1,11 @@
 import os
-from jsonscraper import Instagram, TikTok, APIError
+from jsonscraper_instagram import Instagram, APIError
 
-ig = Instagram(os.environ["JSONSCRAPER_INSTAGRAM_LICENSE_KEY"], timeout=30, retries=1)
-profile = ig.v1_user_by_username(username="apple", cache_timeout=60)
-print(profile)
-
-tiktok = TikTok(os.environ["JSONSCRAPER_TIKTOK_LICENSE_KEY"])
-video = tiktok.get_video_by_id(video_id="7106855913906081070", cache_timeout=60)
-print(video["tiktok"]["aweme_detail"]["aweme_id"])
+client = Instagram(os.environ["JSONSCRAPER_INSTAGRAM_LICENSE_KEY"], timeout=30, retries=1)
+try:
+    response = client.v1_user_by_username(username="apple", cache_timeout=60)
+    if response.get("status") != "ok":
+        raise RuntimeError("The API returned an application error")
+    print(response["ig"])
+except APIError as error:
+    print(f"HTTP {error.status}; check your key, quota, or parameters")
