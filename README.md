@@ -20,6 +20,7 @@ Official Python client for the [jsonscraper Instagram Scraper API](https://jsons
 - [Installation](#1-install)
 - [License key and access](#2-get-api-access)
 - [First request](#3-make-your-first-request)
+- [Available methods](#available-methods)
 - [Request examples](#more-request-examples)
 - [Complete example catalogue](#complete-request-example-catalogue)
 - [Endpoint reference](docs/endpoints.md)
@@ -94,6 +95,23 @@ The profile response follows this shape (shortened; fields can be absent or null
 ```
 
 **[Response handling guide](docs/responses.md)** explains the envelope, application errors and identifiers. Profile responses were verified against the live API on 2026-10-25.
+
+## Available methods
+
+97 named API methods are available. Start with these commonly used requests, then open the [complete method reference](docs/endpoints.md) for every method and its parameters.
+
+| Use case | SDK method | Query parameters |
+| --- | --- | --- |
+| Get user info by username (by ID is faster) | `v1_user_by_username()` | `username`, `cache_timeout` |
+| Get user info by ID | `v1_user_by_id()` | `id`, `cache_timeout` |
+| Get posts (chunked) | `v1_user_medias_chunk()` | `user_id`, `end_cursor`, `cache_timeout` |
+| Get user stories by ID | `v1_user_stories()` | `user_id`, `amount`, `force`, `cache_timeout` |
+| Get media info by shortcode | `v1_media_by_code()` | `code`, `cache_timeout` |
+| Get media comments (chunked) | `v1_media_comments_chunk()` | `id`, `min_id`, `max_id`, `can_support_threading`, `cache_timeout` |
+| Search users | `v1_search_users()` | `query`, `cache_timeout` |
+| Search hashtags | `v1_search_hashtags()` | `query`, `cache_timeout` |
+
+Each method is documented with a [complete runnable example](examples/README.md). The transport preserves the full response envelope, including application status, payload and optional quota metadata.
 
 ## Find the request you need
 
