@@ -4,13 +4,19 @@
 [![Python requirements](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white&style=flat-square)](#quick-start)
 [![Last commit](https://img.shields.io/github/last-commit/jsonscraper/instagram-api-python?style=flat-square)](https://github.com/jsonscraper/instagram-api-python/commits)
 [![MIT license](https://img.shields.io/github/license/jsonscraper/instagram-api-python?style=flat-square)](LICENSE)
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/jsonscraper/workspace/jsonscraper/collection/52903714-fe84d353-0a19-431f-a39d-1c2640d96fb0)
 
 A small, configurable client with named methods and ready-to-run examples. Supports **97 Instagram Scraper API methods**.
 
 **Package:** `jsonscraper-instagram` · **[Methods](#main-methods)** · **[Examples](#ready-to-run-examples)** · **[Documentation](docs/guide.md)**
 
-![Quick start: API key, installation, request, JSON](docs/quickstart.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-color-scheme: dark)" srcset="docs/quickstart-mobile-dark.svg">
+  <source media="(max-width: 640px)" srcset="docs/quickstart-mobile.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/quickstart-dark.svg">
+  <img src="docs/quickstart.svg" alt="Quick start: API key, setup, first request, JSON response" width="880">
+</picture>
 
 ## Quick start
 

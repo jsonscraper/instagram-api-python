@@ -7,10 +7,14 @@
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/jsonscraper/workspace/jsonscraper/collection/52903714-fe84d353-0a19-431f-a39d-1c2640d96fb0)
 
-
 Official Python client for the [jsonscraper Instagram Scraper API](https://jsonscraper.com/services/ig-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=instagram-api-python&utm_content=readme). **97 documented GET routes**, simple installation, configurable requests, working examples, and responses ready for your application.
 
-![From API access to your first JSON response](quickstart.svg)
+<picture>
+  <source media="(max-width: 640px) and (prefers-color-scheme: dark)" srcset="quickstart-mobile-dark.svg">
+  <source media="(max-width: 640px)" srcset="quickstart-mobile.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="quickstart-dark.svg">
+  <img src="quickstart.svg" alt="Quick start: API key, setup, first request, JSON response" width="880">
+</picture>
 
 **[Get an API key](https://jsonscraper.com/services/ig-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=instagram-api-python&utm_content=get_access) · [Current pricing](https://jsonscraper.com/services/ig-scraper-api?utm_source=github&utm_medium=sdk&utm_campaign=instagram-api-python&utm_content=pricing#pricing) · [Endpoint reference](endpoints.md) · [Runnable examples](../examples) · [Postman](https://www.postman.com/jsonscraper/workspace/jsonscraper/collection/52903714-fe84d353-0a19-431f-a39d-1c2640d96fb0)**
 
