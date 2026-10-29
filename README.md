@@ -40,7 +40,7 @@ export JSONSCRAPER_INSTAGRAM_LICENSE_KEY='your-license-key'
 **2. Install the package:**
 
 ```sh
-python -m pip install "git+https://github.com/jsonscraper/instagram-api-python.git@0.1.1"
+python -m pip install "git+https://github.com/jsonscraper/instagram-api-python.git@0.1.2"
 ```
 
 **3. Make a request:**
